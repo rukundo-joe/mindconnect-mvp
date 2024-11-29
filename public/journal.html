@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MindConnect - Journal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- TailwindCSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Styles (Optional) -->
+  <style>
+    /* Custom scrollbar for better aesthetics */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #888; 
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555; 
+    }
+    
+    /* Mood Icons */
+    .mood-option {
+      display: flex;
+      align-items: center;
+    }
+    
+    .mood-option i {
+      margin-right: 0.5rem;
+    }
+  </style>
+  <!-- Journal Script -->
+  <script src="js/journal.js" defer></script>
+</head>
+<body class="bg-gray-100 flex flex-col h-screen">
+  
+  <!-- Navbar -->
+  <nav class="bg-purple-600 p-4 flex justify-between items-center shadow-md">
+    <div class="flex items-center">
+      <a href="index.html" class="text-white text-2xl font-bold mr-6">MindConnect</a>
+      <a href="chat.html" class="text-white mr-4 hover:text-gray-200">Chat</a>
+      <a href="journal.html" class="text-white mr-4 font-semibold border-b-2 border-white">Journal</a>
+      <a href="library.html" class="text-white mr-4 hover:text-gray-200">Library</a>
+      <a href="blog.html" class="text-white mr-4 hover:text-gray-200">Blog</a>
+    </div>
+    <button id="logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded flex items-center">
+      <i class="fas fa-sign-out-alt mr-2"></i> Logout
+    </button>
+  </nav>
+  
+  <!-- Main Content -->
+  <div class="flex-1 p-6 overflow-auto">
+    <!-- Journal Entry Form -->
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mb-8">
+      <h2 class="text-2xl font-bold mb-4 text-gray-800">New Journal Entry</h2>
+      <form id="journal-form" class="space-y-4">
+        <!-- Journal Textarea -->
+        <div>
+          <label for="journal-text" class="block text-gray-700 mb-2">Your Thoughts</label>
+          <textarea id="journal-text" rows="4" placeholder="How are you feeling today?" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" required></textarea>
+        </div>
+        
+        <!-- Mood Selection -->
+        <div>
+          <label for="journal-mood" class="block text-gray-700 mb-2">Your Mood</label>
+          <select id="journal-mood" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+            <option value="" disabled selected>Select your mood</option>
+            <option value="😊 Happy">😊 Happy</option>
+            <option value="😞 Sad">😞 Sad</option>
+            <option value="😠 Angry">😠 Angry</option>
+            <option value="😰 Anxious">😰 Anxious</option>
+            <option value="😴 Tired">😴 Tired</option>
+            <option value="🤔 Reflective">🤔 Reflective</option>
+            <option value="❤️ Loving">❤️ Loving</option>
+            <option value="😇 Content">😇 Content</option>
+            <option value="😕 Confused">😕 Confused</option>
+          </select>
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="flex justify-end">
+          <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md flex items-center">
+            <i class="fas fa-save mr-2"></i> Save Entry
+          </button>
+        </div>
+        
+        <!-- Success and Error Messages -->
+        <div id="form-message" class="text-center mt-4"></div>
+      </form>
+    </div>
+    
+    <!-- Past Entries -->
+    <div class="max-w-3xl mx-auto">
+      <h3 class="text-2xl font-semibold mb-4 text-gray-800">Past Entries</h3>
+      <div id="entries" class="space-y-6">
+        <!-- Past journal entries will be injected here by journal.js -->
+        <!-- Example Entry -->
+        <!--
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="flex items-center mb-4">
+            <img src="https://i.pravatar.cc/50?img=3" alt="Author Avatar" class="w-12 h-12 rounded-full mr-4">
+            <div>
+              <h4 class="text-xl font-bold text-gray-800">April 25, 2024</h4>
+              <p class="text-sm text-gray-500">😊 Happy</p>
+            </div>
+          </div>
+          <p class="text-gray-700 leading-relaxed">
+            Today was a good day. I felt happy and accomplished with all the tasks I completed. Looking forward to tomorrow!
+          </p>
+        </div>
+        -->
+      </div>
+      
+      <!-- No Entries Message -->
+      <div id="no-entries" class="text-center text-gray-500 mt-8 hidden">
+        <p>No journal entries yet. Start by adding your first entry above!</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="bg-purple-600 p-4 text-center text-white">
+    &copy; 2024 MindConnect. All rights reserved.
+  </footer>
+  
+</body>
+</html>

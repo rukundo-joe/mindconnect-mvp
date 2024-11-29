@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MindConnect - Welcome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- TailwindCSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Styles (Optional) -->
+  <style>
+    /* Smooth transition for forms */
+    .transition-opacity {
+      transition: opacity 0.3s ease-in-out;
+    }
+    /* Active tab styling */
+    .active-tab {
+      @apply bg-white text-purple-600 shadow-md;
+    }
+    /* Inactive tab styling */
+    .inactive-tab {
+      @apply text-gray-500 hover:bg-gray-100;
+    }
+  </style>
+  <!-- Authentication Script -->
+  <script src="js/auth.js" defer></script>
+</head>
+<body class="bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center min-h-screen">
+  <div class="w-full max-w-md bg-white bg-opacity-90 p-8 rounded-lg shadow-lg backdrop-filter backdrop-blur-lg">
+    <h2 class="text-4xl font-bold mb-6 text-center text-gray-800">MindConnect</h2>
+    
+    <!-- Tabs for Login and Register -->
+    <div class="flex justify-center mb-6">
+      <button id="login-tab" class="px-4 py-2 mr-2 text-gray-700 bg-gray-200 rounded-tl rounded-bl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 active-tab">Login</button>
+      <button id="register-tab" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-tr rounded-br focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 inactive-tab">Register</button>
+    </div>
+    
+    <!-- Authentication Forms Container -->
+    <div id="auth-forms">
+      
+      <!-- Login Form -->
+      <form id="login-form" class="space-y-4 transition-opacity">
+        <!-- Email Input -->
+        <div>
+          <label for="login-email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="login-email" name="login-email" placeholder="you@example.com" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+        </div>
+        
+        <!-- Password Input Field with Toggle Icon -->
+        <div class="relative mt-4">
+            <input
+            type="password"
+            id="login-password"
+            class="w-full p-3 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            placeholder="Enter your password"
+            required
+            />
+            <span
+            toggle="#login-password"
+            class="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+            aria-label="Toggle password visibility"
+            >
+            <i class="fa fa-eye text-gray-400 toggle-password"></i>
+            </span>
+        </div>  
+        
+        <!-- Remember Me and Forgot Password -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+            <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
+          </div>
+          
+          <div class="text-sm">
+            <a href="#" class="font-medium text-blue-600 hover:text-blue-500">Forgot your password?</a>
+          </div>
+        </div>
+        
+        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <i class="fas fa-sign-in-alt mr-2"></i> Login
+        </button>
+      </form>
+      
+      <!-- Registration Form (Hidden by Default) -->
+      <form id="register-form" class="space-y-4 hidden transition-opacity">
+        <!-- Email Input -->
+        <div>
+          <label for="register-email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="register-email" name="register-email" placeholder="you@example.com" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500" required>
+        </div>
+        
+        <!-- Password Input Field with Toggle Icon -->
+        <!-- Password Input Field with Centered Toggle Icon -->
+        <div class="relative mt-4">
+            <input
+            type="password"
+            id="register-password"
+            class="w-full p-3 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            placeholder="Enter your password"
+            required
+            />
+            <span
+            toggle="#register-password"
+            class="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+            aria-label="Toggle password visibility"
+            >
+            <i class="fa fa-eye text-gray-400 toggle-password"></i>
+            </span>
+        </div>  
+        
+        <!-- Confirm Password Input Field with Toggle Icon -->
+        <div class="relative">
+          <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            class="w-full p-3 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            placeholder="Confirm your password"
+            required
+          />
+          <span
+            toggle="#confirm-password"
+            class="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+            aria-label="Toggle password visibility"
+          >
+            <i class="fa fa-eye text-gray-400 toggle-password"></i>
+          </span>
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+          <i class="fas fa-user-plus mr-2"></i> Register
+        </button>
+      </form>
+      
+    </div>
+    
+    <!-- Error Message -->
+    <div id="auth-error" class="w-full max-w-md mt-4 text-center"></div>
+    </div>
+    <!-- Optional: Include jQuery if needed for additional interactivity -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+  </body>
+</html>

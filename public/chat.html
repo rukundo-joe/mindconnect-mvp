@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MindConnect - Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- TailwindCSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Styles -->
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #888; 
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555; 
+    }
+    
+    /* Message Bubble Styles */
+    .message-bubble {
+      max-width: 70%;
+      padding: 0.75rem 1rem;
+      border-radius: 1rem;
+      position: relative;
+      word-wrap: break-word;
+    }
+    
+    .message-sent {
+      background-color: #3b82f6; /* Blue-500 */
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 0.25rem;
+    }
+    
+    .message-received {
+      background-color: #e5e7eb; /* Gray-200 */
+      color: #1f2937; /* Gray-800 */
+      align-self: flex-start;
+      border-bottom-left-radius: 0.25rem;
+    }
+    
+    /* Avatar Styles */
+    .avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 9999px;
+      object-fit: cover;
+    }
+    
+    /* Typing Indicator */
+    #typing-indicator {
+      font-style: italic;
+      color: #6b7280; /* Gray-500 */
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Scroll to Bottom Button */
+    #scroll-to-bottom {
+      position: fixed;
+      bottom: 5rem;
+      right: 1rem;
+      background-color: #3b82f6; /* Blue-500 */
+      color: white;
+      padding: 0.5rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    }
+    
+    #scroll-to-bottom:hover {
+      background-color: #2563eb; /* Blue-600 */
+      transform: translateY(-2px);
+    }
+    
+    /* Message Timestamp */
+    .timestamp {
+      font-size: 0.75rem;
+      color: #d1d5db; /* Gray-300 */
+      position: absolute;
+      bottom: -1.25rem;
+      right: 0.5rem;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .message-bubble {
+        max-width: 85%;
+      }
+      
+      #scroll-to-bottom {
+        bottom: 4rem;
+        right: 0.5rem;
+      }
+    }
+  </style>
+  <!-- Chat Script -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/chat.js" defer></script>
+</head>
+<body class="bg-gray-100 flex flex-col h-screen">
+  
+  <!-- Navbar -->
+  <nav class="bg-purple-600 p-4 flex justify-between items-center shadow-md">
+    <div class="flex items-center">
+      <a href="index.html" class="text-white text-2xl font-bold mr-6">MindConnect</a>
+      <a href="chat.html" class="text-white mr-4 font-semibold border-b-2 border-white">Chat</a>
+      <a href="journal.html" class="text-white mr-4 hover:text-gray-200">Journal</a>
+      <a href="library.html" class="text-white mr-4 hover:text-gray-200">Library</a>
+      <a href="blog.html" class="text-white mr-4 hover:text-gray-200">Blog</a>
+    </div>
+    <button id="logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded flex items-center">
+      <i class="fas fa-sign-out-alt mr-2"></i> Logout
+    </button>
+  </nav>
+  
+  <!-- Chat Container -->
+  <div class="flex-1 p-4 overflow-auto flex flex-col bg-gray-50">
+    <div id="messages" class="flex flex-col space-y-4 mb-4">
+      <!-- Messages will be injected here by chat.js -->
+      <!-- Example of a received message -->
+      <!--
+      <div class="flex items-start">
+        <img src="https://i.pravatar.cc/50?img=3" alt="User Avatar" class="avatar mr-3">
+        <div>
+          <div class="message-bubble message-received">
+            Hello! How are you today?
+            <span class="timestamp">10:30 AM</span>
+          </div>
+        </div>
+      </div>
+      -->
+    </div>
+    <div id="typing-indicator" class="text-sm text-gray-500"></div>
+  </div>
+  
+  <!-- Message Input Form -->
+  <form id="message-form" class="p-4 bg-white flex items-center shadow-md">
+    <input type="text" id="message-input" placeholder="Type your message..." class="flex-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required autocomplete="off">
+    <button type="submit" class="ml-4 bg-blue-500 hover:bg-blue-600 text-white px-5 py-3 rounded-md flex items-center">
+      <i class="fas fa-paper-plane mr-2"></i> Send
+    </button>
+  </form>
+  
+  <!-- Scroll to Bottom Button -->
+  <button id="scroll-to-bottom" title="Scroll to Bottom" aria-label="Scroll to Bottom">
+    <i class="fas fa-arrow-down"></i>
+  </button>
+  
+</body>
+</html>
